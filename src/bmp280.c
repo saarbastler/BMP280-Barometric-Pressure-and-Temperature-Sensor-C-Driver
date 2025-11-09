@@ -131,7 +131,7 @@ bmp280_error_code_t bmp280_init(
 
 	/*initialize the hardware interface*/
 	BMP280_LOCK(handle);
-	if(handle->dependency_interface.bmp280_interface_init((uint8_t)(handle->i2c_address)) != 0)
+	if(handle->dependency_interface.bmp280_interface_init(handle->i2c_address) != 0)
 	{
 		BMP280_UNLOCK(handle);
 		return BMP280_ERROR_INTERFACE_INIT;
@@ -180,7 +180,7 @@ bmp280_error_code_t bmp280_deinit(bmp280_handle_t *handle)
 	BMP280_CHECK_AND_RETURN_ERROR(error);
 
 	BMP280_LOCK(handle);
-	if(handle->dependency_interface.bmp280_interface_deinit((uint8_t)handle->i2c_address) != 0)
+	if(handle->dependency_interface.bmp280_interface_deinit(handle->i2c_address) != 0)
 	{
 		BMP280_UNLOCK(handle);
 		return BMP280_ERROR_INTERFACE_DEINIT;
@@ -221,7 +221,7 @@ bmp280_error_code_t bmp280_reset(bmp280_handle_t *handle)
 	uint8_t data = BMP280_RESET_VALUE;
 
 	BMP280_LOCK(handle);
-	if (handle->dependency_interface.bmp280_write_array((uint8_t)handle->i2c_address, BMP280_REGISTER_ADDRESS_RESET, &data, 1) != 0)
+	if (handle->dependency_interface.bmp280_write_array(handle->i2c_address, BMP280_REGISTER_ADDRESS_RESET, &data, 1) != 0)
 	{
 		BMP280_UNLOCK(handle);
 		return BMP280_ERROR_INTERFACE_WRITE;

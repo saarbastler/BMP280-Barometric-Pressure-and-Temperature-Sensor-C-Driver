@@ -147,12 +147,15 @@ typedef enum {
  * @brief I2C address used for I2C interface
  * 
  */
-typedef enum
+/*typedef enum
 {
 	BMP280_I2C_ADDRESS_NONE = 0,
 	BMP280_I2C_ADDRESS_1 = 0X76,
 	BMP280_I2C_ADDRESS_2 = 0X77
-} bmp280_i2c_address_t;
+} bmp280_i2c_address_t;*/
+
+#define BMP280_I2C_ADDRESS_NONE 0
+typedef void * bmp280_i2c_address_t;
 
 /**
  * @brief Standby time period to be used in NORMAL mode
@@ -245,7 +248,7 @@ static const bmp280_operation_mode_t BMP280_MODE_DEFAULT = BMP280_MODE_SLEEP;
  * @return Returns 0 for no error
  * 
  */
-typedef int (*bmp280_interface_init_fp)(uint8_t deviceAddress);
+typedef int (*bmp280_interface_init_fp)(bmp280_i2c_address_t deviceAddress);
 
 
 /**
@@ -256,7 +259,7 @@ typedef int (*bmp280_interface_init_fp)(uint8_t deviceAddress);
  * @return Returns 0 for no error
  * 
  */
-typedef int (*bmp280_interface_deinit_fp)(uint8_t deviceAddress);
+typedef int (*bmp280_interface_deinit_fp)(bmp280_i2c_address_t deviceAddress);
 
 
 /**
@@ -295,7 +298,7 @@ typedef int (*bmp280_power_function_fp) (float x, float y, float *result);
  * @return Returns 0 for no error
  * 
  */
-typedef int (*bmp280_write_array_fp)(uint8_t deviceAddress, uint8_t startRegisterAddress, uint8_t *data, uint8_t dataLength);
+typedef int (*bmp280_write_array_fp)(bmp280_i2c_address_t deviceAddress, uint8_t startRegisterAddress, uint8_t *data, uint8_t dataLength);
 
 
 /**
@@ -310,7 +313,7 @@ typedef int (*bmp280_write_array_fp)(uint8_t deviceAddress, uint8_t startRegiste
  * @return Returns 0 for no error
  * 
  */
-typedef int (*bmp280_read_array_fp)(uint8_t deviceAddress, uint8_t startRegisterAddress, uint8_t *data, uint8_t dataLength);
+typedef int (*bmp280_read_array_fp)(bmp280_i2c_address_t deviceAddress, uint8_t startRegisterAddress, uint8_t *data, uint8_t dataLength);
 
 
 #if BMP280_INCLUDE_EXCLUSION_HOOK
